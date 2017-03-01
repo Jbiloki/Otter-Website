@@ -1,6 +1,40 @@
 var DETAIL_IMAGE_SELECTOR = '[data-image-role="target"]';
 var DETAIL_TITLE_SELECTOR = '[data-image-role="title"]';
 var THUMBNAIL_LINK_SELECTOR = '[data-image-role="trigger"]';
+var DETAIL_FRAME_SELECTOR = '[data-image-role="frame"]';
+var HIDDEN_DETAIL_CLASS = 'hidden-detail';
+var TINY_EFFECT_CLASS = 'is-tiny';
+var ESC_KEY = 27;
+
+function hideDetails()
+{
+    'use strict';
+    document.body.classList.add(HIDDEN_DETAIL_CLASS);
+}
+
+function showDetails()
+{
+    'use strict';
+    var frame = document.querySelector(DETAIL_FRAME_SELECTOR);
+    document.body.classList.remove(HIDDEN_DETAIL_CLASS);
+    frame.classList.add(TINY_EFFECT_CLASS);
+    setTimeout(function(){
+        frame.classList.remove(TINY_EFFECT_CLASS);
+    },50);
+}
+
+function addKeyPressListener()
+{
+    document.body.addEventListener('keyup', function(event)
+    {
+        event.preventDefault;
+        if(event.keyCode === ESC_KEY)
+        {
+            hideDetails();
+        }
+    });
+}
+
 function setDetails(imageURL, titleText)
 {
     'use strict';
@@ -35,8 +69,44 @@ function addThumbClickListener(thumb)
     thumb.addEventListener('click', function(event){
         event.preventDefault();
         setDetailsFromThumb(thumb);
+        showDetails();
     });
 }
+
+function addThumbButtonListener(nails)
+{
+    'use strict';
+    document.body.addEventListener('keydown', function(event)
+    {
+        event.preventDefault();
+        if(event.keyCode == 49)
+        {
+            setDetailsFromThumb(nails[0]);
+            showDetails();
+        }
+        else if(event.keyCode == 50)
+        {
+            setDetailsFromThumb(nails[1]);
+            showDetails();
+        }
+        else if(event.keyCode == 51)
+        {
+            setDetailsFromThumb(nails[2]);
+            showDetails();
+        }
+        else if(event.keyCode == 52)
+        {
+            setDetailsFromThumb(nails[3]);
+            showDetails();
+        }
+        else if(event.keyCode == 53)
+        {
+            setDetailsFromThumb(nails[4]);
+            showDetails();
+        }
+    });
+}
+
 
 function getThumbnailsArray(){
     'use strict';
@@ -50,6 +120,8 @@ function initializeEvenets()
     'use strict';
     var thumbnails = getThumbnailsArray();
     thumbnails.forEach(addThumbClickListener);
+    addThumbButtonListener(thumbnails);
+    addKeyPressListener();
 
 }
 

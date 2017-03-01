@@ -43,6 +43,7 @@ html, body {
 .detail-image-frame {
     position: relative;
     text-align: center;
+    transition: transform 333ms cubic-bezier(.01,.98,.84,-0.13);
 }
 
 .detail-image-title {
@@ -68,6 +69,18 @@ html, body {
     flex-direction: column;
     flex: 1 1 auto;
 }
+.hidden-detail .detail-image-container{
+  display: none;
+}
+
+.hidden-detail .thumbnail-list{
+  flex-direction: column;
+  align-items: center;
+}
+
+.hidden-detail .thumbnail-item{
+  max-width: 80%;
+}
 
 .main-header {
     flex: 0 1 auto;
@@ -84,6 +97,16 @@ html, body {
     border: 1px solid rgba(100%, 100%, 100%, 0.8);
     min-width: 120px;
     max-width: 120px;
+    transition: transform 133ms ease-in-out;
+}
+
+.thumbnail-item:hover{
+  transform: scale(1.2);
+}
+
+.is-tiny{
+  transform: scale(0.001);
+  transition: transform 0ms;
 }
 
 .thumbnail-list {
@@ -91,7 +114,7 @@ html, body {
     flex: 0 1 auto;
     order: 2;
     list-style: none;
-    padding: 0;
+    padding: 20px 0;
     white-space: nowrap;
     overflow-x: auto;
     justify-content: space-between;
@@ -115,6 +138,7 @@ html, body {
     flex-direction: column;
     order: 0;
     margin-left: 20px;
+    padding: 0 35px;
   }
   .thumbnail-item{
     max-width: 260px;
