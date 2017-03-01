@@ -43,7 +43,7 @@ html, body {
 .detail-image-frame {
     position: relative;
     text-align: center;
-    transition: transform 333ms cubic-bezier(.01,.98,.84,-0.13);
+    transition: transform 333ms cubic-bezier(.23,.08,.34,1.73);
 }
 
 .detail-image-title {
