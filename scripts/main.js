@@ -5,6 +5,8 @@ var DETAIL_FRAME_SELECTOR = '[data-image-role="frame"]';
 var HIDDEN_DETAIL_CLASS = 'hidden-detail';
 var TINY_EFFECT_CLASS = 'is-tiny';
 var ESC_KEY = 27;
+var NUM_1 = 49;
+var NUM_0 = 57;
 
 function hideDetails()
 {
@@ -27,7 +29,7 @@ function addKeyPressListener()
 {
     document.body.addEventListener('keyup', function(event)
     {
-        event.preventDefault;
+        event.preventDefault();
         if(event.keyCode === ESC_KEY)
         {
             hideDetails();
@@ -38,6 +40,7 @@ function addKeyPressListener()
 function setDetails(imageURL, titleText)
 {
     'use strict';
+
     var detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
     detailImage.setAttribute('src', imageURL);
 
@@ -73,36 +76,18 @@ function addThumbClickListener(thumb)
     });
 }
 
+
 function addThumbButtonListener(nails)
 {
     'use strict';
-    document.body.addEventListener('keydown', function(event)
-    {
+    document.body.addEventListener('keydown', function(event) {
         event.preventDefault();
-        if(event.keyCode == 49)
+        if(event.keyCode >= NUM_1 && event.keyCode <= NUM_0)
         {
-            setDetailsFromThumb(nails[0]);
-            showDetails();
-        }
-        else if(event.keyCode == 50)
-        {
-            setDetailsFromThumb(nails[1]);
-            showDetails();
-        }
-        else if(event.keyCode == 51)
-        {
-            setDetailsFromThumb(nails[2]);
-            showDetails();
-        }
-        else if(event.keyCode == 52)
-        {
-            setDetailsFromThumb(nails[3]);
-            showDetails();
-        }
-        else if(event.keyCode == 53)
-        {
-            setDetailsFromThumb(nails[4]);
-            showDetails();
+            if(nails[event.keyCode-49] != undefined){
+                setDetailsFromThumb(nails[event.keyCode - 49]);
+                showDetails();
+            }
         }
     });
 }
@@ -122,7 +107,6 @@ function initializeEvenets()
     thumbnails.forEach(addThumbClickListener);
     addThumbButtonListener(thumbnails);
     addKeyPressListener();
-
 }
 
 initializeEvenets();
